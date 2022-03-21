@@ -1,9 +1,9 @@
 ## Intro
 Number Base Conversion - Math Visualization
 
-To convert a number from one base to another, we can use the following formula:
-
-
+To convert a number from one base to another, we can use the following steps:
+1. Convert the number to a base 10 number.
+2. Convert the base 10 number to the new base.
 
 This react website helps us visualize this process.
 
@@ -16,12 +16,14 @@ This react website helps us visualize this process.
 5. Open http://localhost:3000/
 6. Enjoy!
 
-## Usage
-1. Click on the number to convert.
-2. Click on the base to convert to.
-3. Click on the base to convert from.
-4. Enjoy!
+## How to use this program
 
+Here is a step by step guide to use this program:
+
+1. Enter a number to convert.
+2. Enter the base of the number.
+3. Enter the base to convert to.
+4. Click the convert button to convert the number.
 
 ## Credits
 
