@@ -1,15 +1,19 @@
 import  convertBase from './Utils/ConvertBase';
 import Input from './Components/Input';
+import Error from './Components/Error';
 import { ChangeEvent, useEffect } from 'react';
 import { useState } from 'react';
+import Latex from "react-latex-next";
+require('./App.css');
 
 function App() {
 
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>("1");
   const [base, setBase] = useState<number>(10);
   const [baseTo, setBaseTo] = useState<number>(10);
   const [result, setResult] = useState<string>("");
   const [error, setError] = useState<string>("");
+
 
   useEffect(() => {
     try {
@@ -36,11 +40,16 @@ function App() {
           setBaseTo(e.target.value);
       }} />
 
-    
-      <p>Result: {result}</p>
-      <p>{error}</p>
+      <div>
+				<Latex>{`View: $${value}_{${base}} = ?_{${baseTo}}$`}</Latex> 
+        <div>Result: {result}</div>
+        <Error error={error} />
+			</div>
+
     </>
   );
 }
+
+
 
 export default App;
