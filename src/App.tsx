@@ -1,15 +1,20 @@
 import  convertBase from './Utils/ConvertBase';
 import Input from './Components/Input';
+import Error from './Components/Error';
+import Result from './Components/Result';
 import { ChangeEvent, useEffect } from 'react';
 import { useState } from 'react';
+import Latex from "react-latex-next";
+require('./App.css');
 
 function App() {
 
-  const [value, setValue] = useState<string>("");
-  const [base, setBase] = useState<number>(10);
+  const [value, setValue] = useState<string>("FF");
+  const [base, setBase] = useState<number>(16);
   const [baseTo, setBaseTo] = useState<number>(10);
   const [result, setResult] = useState<string>("");
   const [error, setError] = useState<string>("");
+
 
   useEffect(() => {
     try {
@@ -23,24 +28,36 @@ function App() {
   }, [value, base, baseTo]);
 
   return (
-    <>
-      <h1>Convert Base</h1>
-      <Input id="value-input" label="Value" type="text" name="value" value={value} onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setValue(e.target.value);
+    <div className='container'>
+      <h1>Base Converter</h1>
+      <div className='base-converter-form'>
+        <Input id="value-input" label="Enter a number" type="text" name="value" value={value} onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          if (e.target.value.length < 8) {
+            setValue(e.target.value.toUpperCase());
+          }
+        }} />
+        <Input id="base-input" label="From Base" type="number" name="base" value={base} min="2" max="36" onChange={(e: any) => {
+            setBase(e.target.value);
+        }} />
+        <Input id="base-to-input" label="To Base" type="number" name="baseTo" value={baseTo} min="2" max="36" onChange={(e: any) => {
+            setBaseTo(e.target.value);
+        }} />
+        <Error error={error} />
+        <div id='view'>
 
-      }} />
-      <Input id="base-input" label="Base" type="number" name="base" value={base} onChange={(e: any) => {
-          setBase(e.target.value);
-      }} />
-      <Input id="base-to-input" label="Base To" type="number" name="baseTo" value={baseTo} onChange={(e: any) => {
-          setBaseTo(e.target.value);
-      }} />
+        	<Latex>{`$${value.toUpperCase()}_{${base}} = ${result}_{${baseTo}}$`}</Latex> 
 
-    
-      <p>Result: {result}</p>
-      <p>{error}</p>
-    </>
+        </div>
+      </div>
+
+      <div className='result'>
+        <Result result={result} value={value} base={base} baseTo={baseTo} />
+			</div>
+
+    </div>
   );
 }
+
+
 
 export default App;

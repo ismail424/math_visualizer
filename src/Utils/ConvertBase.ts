@@ -24,7 +24,7 @@ const convertBase = (value: string, from_base: number, to_base: number) => {
   
     // return null if base is not between 2 and 36
     if (from_base < 2 || from_base > 36 || to_base < 2 || to_base > 36) {
-      throw new Error('Base must be between 2 and 36');
+      throw new Error('Both base values must be between 2 and 36');
     }
    
     // Loop through the input value
@@ -34,7 +34,7 @@ const convertBase = (value: string, from_base: number, to_base: number) => {
   
       // If the current digit is not found in the digit system return null
       if (current_digit >= from_base) {
-        throw new Error('Invalid digit used in input');
+        throw new Error('Input value contains digits not in the digit system');
       }
       // Add the current digit to the result
       result_desc += current_digit * Math.pow(from_base, value_array.length - i - 1);
